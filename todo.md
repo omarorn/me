@@ -19,6 +19,14 @@
 - Schedule Cron Jobs for periodic tasks.
 - Optimize usage by setting limits and auto-sleep for inactive services.
 
+## Database Initialization for Railway Deployment
+- Add database initialization script to create required tables before app startup
+- Create a pre-start script to initialize the SQLite database
+- Ensure the "user_llm_configs" table is created
+- Add database migration commands to the Railway build or start process
+- Consider using a persistent volume for SQLite database in Railway
+- Update railway.toml to include database initialization in the build or start command
+
 ## Future Tasks
 - Periodically update roocodelog.md with project progress.
 - Review and adjust Dockerfiles and compose configurations as needed.

@@ -7,7 +7,7 @@ region = "europe-west4"
 [deploy]
 auto_deploy = true
 buildCommand = "pip install -r requirements.txt"
-startCommand = "python app.py"
+startCommand = "mkdir -p /app/data/sqlite && sqlite3 /app/data/sqlite/lpm.db < docker/sqlite/init.sql && python app.py"
 
 [services.backend.env]
 AIRTABLE_API_KEY = "${{shared.AIRTABLE_API_KEY}}"
@@ -19,3 +19,11 @@ onedrive_client_id = "${{shared.onedrive_client_id}}"
 onedrive_client_secret = "${{shared.onedrive_client_secret}}"
 OPENAI_API_KEY = "${{shared.OPENAI_API_KEY}}"
 pinecone_api_key = "${{shared.pinecone_api_key}}"
+PYTHONUNBUFFERED = "1"
+PYTHONPATH = "/app"
+BASE_DIR = "/app/data"
+LOCAL_LOG_DIR = "/app/logs"
+RUN_DIR = "/app/run"
+RESOURCES_DIR = "/app/resources"
+APP_ROOT = "/app"
+FLASK_APP = "lpm_kernel.app"
