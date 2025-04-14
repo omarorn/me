@@ -6,8 +6,8 @@ region = "europe-west4"
 
 [deploy]
 auto_deploy = true
-buildCommand = "apt-get update && apt-get install -y sqlite3 && apt-get clean && pip install -r requirements.txt"
-startCommand = "echo 'Initializing SQLite database...' && sqlite3 /app/data/sqlite/lpm.db < docker/sqlite/init.sql || echo 'SQLite initialization failed' && echo 'Database initialization complete.' && python app.py"
+buildCommand = "pip install -r requirements.txt"
+startCommand = "python app.py"
 
 [services.backend.env]
 AIRTABLE_API_KEY = "${{shared.AIRTABLE_API_KEY}}"
@@ -27,3 +27,4 @@ RUN_DIR = "/app/run"
 RESOURCES_DIR = "/app/resources"
 APP_ROOT = "/app"
 FLASK_APP = "lpm_kernel.app"
+DB_TYPE = "postgres"
