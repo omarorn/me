@@ -19,3 +19,21 @@
    - Simplified the configuration to focus on the Python application
 
 5. Identified from pyproject.toml that this is a Flask application (not FastAPI) and updated the app.py file accordingly to use Flask's run method instead of uvicorn
+
+6. Encountered ModuleNotFoundError for Flask - Poetry wasn't installing dependencies correctly in the Railway environment
+
+7. Created requirements.txt file with all dependencies from pyproject.toml to use a more direct approach for dependency installation
+
+8. Updated railway.toml to use pip with requirements.txt instead of Poetry:
+   - Changed buildCommand to "pip install -r requirements.txt"
+   - Kept startCommand as "python app.py"
+
+9. Encountered dependency conflicts with pydantic versions:
+   - langchain 0.3.13 requires pydantic>=2.7.4,<3.0.0
+   - openai 1.50.0 requires pydantic>=1.9.0,<3
+   - flask-pydantic 0.11.0 requires pydantic>=1.7
+   - Our specified version was pydantic==2.5.2
+
+10. Updated requirements.txt to resolve conflicts:
+    - Removed flask-pydantic to avoid conflicts
+    - Changed pydantic version to match langchain's requirements (>=2.7.4,<3.0.0)
