@@ -1,0 +1,37 @@
+# railway.toml
+
+[project]
+name = "secondme"
+region = "auto"
+
+[deploy]
+command = "docker-compose up --build"
+auto_deploy = true
+
+[services.backend]
+build = "Dockerfile.backend"
+command = "python lpm_kernel/app.py"
+port = 8000
+[services.backend.env]
+AIRTABLE_API_KEY = "${{shared.AIRTABLE_API_KEY}}"
+DATABASE_PRIVATE_URL = "${{Postgres-hu8_.DATABASE_PRIVATE_URL}}"
+DATABASE_URL = "${{Postgres.DATABASE_URL}}"
+grok = "${{shared.grok}}"
+groq_api_key = "${{shared.groq_api_key}}"
+onedrive_client_id = "${{shared.onedrive_client_id}}"
+onedrive_client_secret = "${{shared.onedrive_client_secret}}"
+OPENAI_API_KEY = "${{shared.OPENAI_API_KEY}}"
+pinecone_api_key = "${{shared.pinecone_api_key}}"
+
+[services.frontend]
+build = "Dockerfile.frontend"
+command = "npm start"
+port = 3000
+# You can add env block for frontend if required
+
+[services.database]
+# Optionally define if using a PostgreSQL database.
+# Uncomment and configure as needed.
+# build = ""
+# command = ""
+# port = 5432
