@@ -6,7 +6,7 @@ region = "europe-west4"
 
 [deploy]
 auto_deploy = true
-buildCommand = "pip install poetry && poetry install --no-dev"
+buildCommand = "pip install -r requirements.txt"
 startCommand = "python app.py"
 
 [services.backend.env]
