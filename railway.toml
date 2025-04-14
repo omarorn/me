@@ -7,7 +7,7 @@ region = "europe-west4"
 [deploy]
 auto_deploy = true
 buildCommand = "apt-get update && apt-get install -y sqlite3 && apt-get clean && pip install -r requirements.txt"
-startCommand = "echo 'Initializing SQLite database...' && sqlite3 /app/data/sqlite/lpm.db < docker/sqlite/init.sql && echo 'Database initialization complete.' && python app.py"
+startCommand = "echo 'Initializing SQLite database...' && sqlite3 /app/data/sqlite/lpm.db < docker/sqlite/init.sql || echo 'SQLite initialization failed' && echo 'Database initialization complete.' && python app.py"
 
 [services.backend.env]
 AIRTABLE_API_KEY = "${{shared.AIRTABLE_API_KEY}}"
